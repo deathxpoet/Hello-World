@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>JAVASCRIPT String Challenge</title>
+    <style type="text/css">
+        #output label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <label>Enter a string:</label>
+        <input id="the_string" type="text"/>
+        <input id="the_submit" type="button" value="submit"/>
+    </section>
+
+    <section>
+        <div id="output">
+
+        </div>
+    </section>
+    <script type="text/javascript">
+
+
+        function process_string(event) {
+            var the_string = document.getElementById("the_string");
+            var the_div = document.getElementById("output");
+            var the_string_value = the_string.value;
+
+            //Method 1 code block
+            reverse_method_illus_1(the_string_value);
+            var newLabel = document.createElement("label");
+            var newContent = document.createTextNode("Reverse Method One: " + reverse_method_1(the_string_value));
+            newLabel.appendChild(newContent);
+            the_div.appendChild(newLabel);
+
+            //Method 2 code block
+            reverse_method_illus_2(the_string_value);
+            var newLabel_2 = document.createElement("label");
+            var newContent_2 = document.createTextNode("Reverse Method Two: " + reverse_method_2(the_string_value));
+            newLabel_2.appendChild(newContent_2);
+            the_div.insertBefore(newLabel_2, newLabel);
+
+            //Method 3 code block
+            reverse_method_illus_3();
+            var newLabel_3 = document.createElement("label");
+            var newContent_3 = document.createTextNode("Reverse Method Three: " + reverse_method_3(the_string_value, "", the_string_value.length - 1));
+            newLabel_3.appendChild(newContent_3);
+            the_div.insertBefore(newLabel_3, newLabel_2);
+        }
+
+        function reverse_method_1(string_value)
+        {
+            return string_value.split("").reverse().join("").toString();
+        }
+
+        function reverse_method_illus_1(string_value)
+        {
+            var sample_ar = ['Hello', 'World', 'Dogie'];
+            console.log("reverse_method_1, using the built in function to produce a reverse of the entered string.");
+            console.log("var sample_ar = ['Hello', 'World', 'Dogie'] is used as a sample array for .reverse and .join which are an array built in function.");
+            console.log("result in string.split(''): ", string_value.split(""));
+            console.log("result in array.reverse(): ", sample_ar.reverse());
+            console.log("result in array.join(): ", sample_ar.join(""));
+            console.log(" ");
+            console.log("See the difference between the string.split('') with the string.split(). Just like me you would probably wonder the difference between them, "
+                       +"Using the same sample_arr array.");
+            console.log("difference string.split(''): ", string_value.split(""));
+            console.log("difference string.split(): ", string_value.split());
+            console.log("Hey, why not throw the array.join('') and array.join() difference.");
+            console.log("difference array.join(''): ", sample_ar.join(""));
+            console.log("difference array.join(): ", sample_ar.join());
+        }
+
+        function reverse_method_2(string_value)
+        {
+            var text_length = string_value.length;
+            var result = "";
+
+            for (var x = text_length - 1; x > -1; x--)
+            {
+                result += string_value.charAt(x);
+            }
+
+            return result;
+        }
+
+        function reverse_method_illus_2(string_value)
+        {
+            console.log("----------");
+            console.log("----------");
+            console.log("reverse_method_2, using the for-loop approach to produce a reverse of the entered string.");
+            console.log("Compare to the first approach, this one is a straight forward code. Anyone who sees the code can understand it.");
+            console.log("[this note is for those who are very new to programming]");
+            console.log("NOTE: notice the text_length and x variables, array is zero base which means we start counting from '0' and not from '1'");
+            console.log("We need to deduct by 1 the value of text_length since the .length returns a non zero-base count.")
+        }
+
+        function reverse_method_3(string, result, delimiter)
+        {
+            if (delimiter != -1) {
+                result += string.charAt(delimiter);
+                return reverse_method_3(string, result, delimiter - 1);
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        function reverse_method_illus_3(string_value)
+        {
+            console.log("----------");
+            console.log("----------");
+            console.log("reverse_method_3, using the recursive approach to produce a reverse of the entered string.");
+            console.log("Probably the hardest one of the 3 approach. If you dont know what's a recursion is, then better look it up on the net.");
+            console.log("I personally find recursion very difficult and complicated, maybe some of you guys think the other-way-around.");
+            console.log("Focus on the params 'result' and 'delimiter'. The 'result' is the combined result of the recursion, 'delimiter' is the breaker of the recursion.");
+            console.log("Again, if you're not familiar with Recursion, look it up on the net it's a nice concept that can make your brain break.");
+        }
+
+        document.getElementById("the_submit").addEventListener("click", process_string, false);
+    </script>
+</body>
+</html>
